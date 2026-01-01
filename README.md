@@ -1,6 +1,6 @@
-# Keren Web - Interview Management System
+# Keren Web - Double Bot & Group Reflection System
 
-A full-stack web application for managing job interviews, group reflections, and instructor dashboards.
+A full-stack web application for group reflections with AI-powered double bot system and instructor dashboards.
 
 ## Tech Stack
 
@@ -26,18 +26,16 @@ keren-web/
 ├── src/                          # Frontend source code
 │   ├── components/               # React components
 │   │   ├── connection/          # Login and signup components
-│   │   ├── general/             # Dashboard and interview system
-│   │   ├── groupreflection/     # Group reflection features
-│   │   ├── history/             # Interview history
-│   │   └── newinterview/        # New interview creation
+│   │   ├── general/             # Main system and instructor dashboard
+│   │   └── groupreflection/     # Double bot and group reflection features
 │   ├── services/                # API services
 │   ├── App.jsx                  # Main app component
 │   └── main.jsx                 # App entry point
 ├── backend/                      # Backend API
-│   ├── models/                  # MongoDB models
-│   ├── routes/                  # API routes
+│   ├── models/                  # MongoDB models (Team, GroupReflection, Task, etc.)
+│   ├── routes/                  # API routes (doublebot, teams, reflections, etc.)
 │   ├── middleware/              # Auth middleware
-│   └── services/                # Background services
+│   └── services/                # Background services (monitoring)
 ├── public/                       # Static assets
 └── index.html                    # HTML entry point
 
@@ -129,11 +127,14 @@ The backend will run on `http://localhost:5000`
 ## Features
 
 - **User Authentication**: Login and signup with JWT tokens
-- **Interview Management**: Create, manage, and view interview records
-- **AI Question Generation**: Generate interview questions using Google AI
-- **Group Reflections**: Team-based reflection system
-- **Instructor Dashboard**: Monitor students and teams
-- **Interview History**: View past interviews and summaries
+- **Double Bot System**: AI-powered conversation system using Cerebras API
+  - Bot 1: Interactive conversation bot for team discussions
+  - Bot 2: Analysis bot for generating insights and recommendations
+- **Group Reflections**: Team-based reflection system with sentiment analysis
+- **Team Management**: Create and manage student teams
+- **Instructor Dashboard**: Monitor teams, view analytics, and track progress
+- **Smart Task Generation**: Automatic task creation based on reflection analysis
+- **Real-time Monitoring**: Background jobs for team status monitoring
 
 ## Security Notes
 

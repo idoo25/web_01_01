@@ -12,10 +12,8 @@ import dotenv from 'dotenv';
 
 // Import routes
 import authRoutes from './routes/auth.js';
-import interviewRoutes from './routes/interviews.js';
 import groupReflectionRoutes from './routes/groupReflections.js';
 import instructorRoutes from './routes/instructor.js';
-import claudeRoutes from './routes/claude.js';
 import doublebotRoutes from './routes/doublebot.js';
 import teamsRoutes from './routes/teams.js';
 import tasksRoutes from './routes/tasks.js';
@@ -94,21 +92,20 @@ connectDB();
 // ====================================================================
 app.get('/', (req, res) => {
   res.json({
-    message: 'ðŸš€ Keren Web API Server',
-    version: '1.0.0',
+    message: 'ðŸš€ Keren Web API Server - Double Bot & Reflection System',
+    version: '2.0.0',
     endpoints: {
       auth: '/api/auth',
-      interviews: '/api/interviews',
-      groupReflections: '/api/group-reflections'
+      groupReflections: '/api/group-reflections',
+      doublebot: '/api/doublebot',
+      teams: '/api/teams'
     }
   });
 });
 
 app.use('/api/auth', authRoutes);
-app.use('/api/interviews', interviewRoutes);
 app.use('/api/group-reflections', groupReflectionRoutes);
 app.use('/api/instructor', instructorRoutes);
-app.use('/api/claude', claudeRoutes);
 app.use('/api/doublebot', doublebotRoutes);
 app.use('/api/teams', teamsRoutes);
 app.use('/api/tasks', tasksRoutes);
