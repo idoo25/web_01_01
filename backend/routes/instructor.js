@@ -6,7 +6,6 @@
 import express from 'express';
 import Notification from '../models/Notification.js';
 import User from '../models/User.js';
-import Interview from '../models/Interview.js';
 import GroupReflection from '../models/GroupReflection.js';
 import { authenticateToken, isInstructor } from '../middleware/auth.js';
 
@@ -36,25 +35,6 @@ router.get('/students', async (req, res) => {
 });
 
 // ====================================================================
-// GET /api/instructor/interviews - Get all interviews
-// ====================================================================
-router.get('/interviews', async (req, res) => {
-  try {
-    const interviews = await Interview.find()
-      .populate('userId', 'name email')
-      .sort({ createdAt: -1 });
-
-    res.json({
-      interviews,
-      total: interviews.length
-    });
-  } catch (error) {
-    console.error('Get all interviews error:', error);
-    res.status(500).json({ error: 'Error fetching interviews' });
-  }
-});
-
-// ====================================================================
 // GET /api/instructor/reflections - Get all group reflections
 // ====================================================================
 router.get('/reflections', async (req, res) => {
@@ -79,13 +59,11 @@ router.get('/reflections', async (req, res) => {
 router.get('/stats', async (req, res) => {
   try {
     const totalStudents = await User.countDocuments({ role: 'student' });
-    const totalInterviews = await Interview.countDocuments();
     const totalReflections = await GroupReflection.countDocuments();
     const completedReflections = await GroupReflection.countDocuments({ stage: 'completed' });
 
     res.json({
       totalStudents,
-      totalInterviews,
       totalReflections,
       completedReflections,
       activeReflections: totalReflections - completedReflections
@@ -107,15 +85,12 @@ router.get('/student/:id', async (req, res) => {
       return res.status(404).json({ error: 'Student not found' });
     }
 
-    const interviews = await Interview.find({ userId: req.params.id });
     const reflections = await GroupReflection.find({ userId: req.params.id });
 
     res.json({
       student,
-      interviews,
       reflections,
       stats: {
-        totalInterviews: interviews.length,
         totalReflections: reflections.length
       }
     });
