@@ -1,0 +1,7 @@
+
+  /* Dark theme background for the container */
+  body.dark #background {
+    background-color: #4b5563; /* Tailwind's gray-600 (dark mode background) */
+  }
+
+  
